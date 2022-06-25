@@ -1,0 +1,17 @@
+method = pulse
+
+[general]
+bars = 120
+bar_width = 4
+bar_spacing = 1
+
+[color]
+gradient = 1
+gradient_color_1 = '#b66467'
+gradient_color_2 = '#8c977d'
+gradient_color_3 = '#d9bc8c'
+gradient_color_4 = '#8da3b9'
+gradient_color_5 = '#a988b0'
+gradient_color_6 = '#8aa6a2'
+gradient_color_7 = '#e8e3e3'
+gradient_color_8 = '#b66467'
