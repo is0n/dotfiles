@@ -1,0 +1,132 @@
+(defwindow music
+  :monitor 0
+  :geometry (geometry
+    :x "12px"
+    :y "12px"
+    :anchor "top left")
+  :stacking "fg"
+  :windowtype "dock"
+  (music))
+
+(defwidget music []
+  (box :orientation "h" :space-evenly false :spacing 20 :class "music"
+    (box :class "art" :style "background-image: url('${cover}');" art)
+    (box :orientation "v" :space-evenly true :class "info"
+      (box :space-evenly false :class "title"
+        (box :class "label" "")
+        (label :text ": ${title}"
+               :class "text"
+               :limit-width 25
+               :halign "start"))
+      (box :space-evenly false :class "artist"
+        (box :class "label" "")
+        (label :text ": ${artist}"
+               :class "text"
+               :limit-width 25
+               :halign "start"))
+      (box :space-evenly false :class "album"
+        (box :class "label" "")
+        (label :text ": ${album}"
+               :class "text"
+               :limit-width 25
+               :halign "start")))))
+
+(defpoll cover  :interval "5s"  "scripts/getmusic art")
+(defpoll title  :interval "5s"  "scripts/getmusic title")
+(defpoll artist :interval "5s"  "scripts/getmusic artist")
+(defpoll album  :interval "5s"  "scripts/getmusic album")
+(defpoll art    :interval "5s"  "scripts/getart")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwindow fetch
+  :monitor 0
+  :geometry (geometry
+    :x "-12px"
+    :y "12px"
+    :anchor "top right")
+  :stacking "fg"
+  :windowtype "dock"
+  (fetch))
+
+(defwidget fetch []
+  (box  :space-evenly true
+        :orientation "v"
+        :class "fetch"
+    (box :space-evenly false :class "os"
+      (box :class "label" "")
+      (label :text ": ${os}"
+             :class "text"
+             :halign "start"))
+    (box :space-evenly false :class "wm"
+      (box :class "label" "")
+      (label :text ": ${wm}"
+             :class "text"
+             :halign "start"))
+    (box :space-evenly false :class "usr"
+      (box :class "label" "")
+      (label :text ": ${usr}"
+             :class "text"
+             :halign "start"))
+    (box :space-evenly false :class "hst"
+      (box :class "label" "")
+      (label :text ": ${hst}"
+             :class "text"
+             :halign "start"))
+    (box :space-evenly false :class "pkg"
+      (box :class "label" "")
+      (label :text ": ${pkg}"
+             :class "text"
+             :halign "start"))
+    (box :space-evenly false :class "uptime"
+      (box :class "label" "")
+      (label :text ": ${uptime}"
+             :class "text"
+             :halign "start"))))
+
+(defpoll os     :interval "24h" "scripts/getos")
+(defpoll wm     :interval "24h" "scripts/getwm")
+(defpoll usr    :interval "24h" "whoami")
+(defpoll hst    :interval "24h" "uname -n")
+(defpoll pkg    :interval "24h" "pacman -Q | wc -l")
+(defpoll uptime :interval "10m" "uptime -p | sed -e 's/up //;s/ hours,/h/;s/ minutes/m/'")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwindow time
+  :monitor 0
+  :geometry (geometry
+    :y "-25%"
+    :anchor "center")
+  :stacking "fg"
+  :windowtype "dock"
+  (time))
+
+(defwidget time []
+  (box :orientation "v"
+       :halign "center"
+       :space-evenly false
+       :class "time"
+    (label :text hour
+           :class "hour")
+    (label :text date
+           :class "date")))
+
+(defpoll hour :interval "2s"  "date '+%H:%M'")
+(defpoll date :interval "10m" "date +%a,' '%b' '%d")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwindow quote
+  :monitor 0
+  :geometry (geometry
+    :y "-12px"
+    :x "12px"
+    :anchor "center bottom")
+  :stacking "fg"
+  :windowtype "dock"
+  (label :class "quote"
+         :text "${quote}"
+         :limit-width 100))
+
+(defpoll quote :interval "24h" "fortune -n 90 -s")

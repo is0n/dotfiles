@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+CONFIG_DIR="${HOME}/.config/eww/vbar/"
+EWW="eww -c ${CONFIG_DIR}"
+WIN="cal"
+
+function close {
+  ${EWW} close ${WIN}
+}
+
+function open {
+  ${EWW} open ${WIN}
+}
+
+function toggle {
+  ${EWW} close ${WIN} || ${EWW} open ${WIN}
+}
+
+case "$1" in
+  open)
+    open;;
+  close)
+    close;;
+  toggle)
+    toggle;;
+esac

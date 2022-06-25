@@ -1,0 +1,183 @@
+(defwindow dashboard
+  :monitor 0
+  :geometry (geometry :anchor "center right")
+  :stacking "fg"
+  :windowtype "dock"
+  (dashboard))
+
+(defwidget dashboard []
+  (box :orientation "v" :space-evenly false :class "dashboard" :spacing 20 :halign "center"
+    (info)
+    (mid)
+    (circles)
+    (powerbuttons)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget info []
+  (box :class "info" :space-evenly false :spacing 20
+    (profile)
+    (fetch)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget profile []
+  (box :orientation "v" :space-evenly false :class "profile" :halign "center"
+    (box :class "pfp"
+         :valign "center"
+         :style "background-image: url('${pfp}');")
+    (label :class "me" :text "[${usr}@${hst}]")))
+
+(deflisten pfp "tail -F ~/.config/eww/pfp 2>/dev/null")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget fetch []
+  (box  :space-evenly true
+        :orientation "v"
+        :class "fetch"
+    (box :space-evenly false :class "os"
+      (box :class "label" "")
+      (label :text ": ${os}"
+             :class "text"
+             :halign "start"))
+    (box :space-evenly false :class "wm"
+      (box :class "label" "")
+      (label :text ": ${wm}"
+             :class "text"
+             :halign "start"))
+    (box :space-evenly false :class "usr"
+      (box :class "label" "")
+      (label :text ": ${usr}"
+             :class "text"
+             :halign "start"))
+    (box :space-evenly false :class "hst"
+      (box :class "label" "")
+      (label :text ": ${hst}"
+             :class "text"
+             :halign "start"))))
+
+(defpoll os  :interval "24h" "scripts/getos")
+(defpoll wm  :interval "24h" "scripts/getwm")
+(defpoll usr :interval "24h" "whoami")
+(defpoll hst :interval "24h" "uname -n")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget mid []
+  (box :class "mid" :space-evenly false :spacing 20
+    (box :orientation "v" :space-evenly false :spacing 20
+      (time)
+      (control))
+    (box :orientation "h" :halign "end"
+      (sliders))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget sliders []
+  (box :orientation "h" :space-evenly false :class "sliders" :halign "start" :valign "center" :spacing 20
+    (metric :class "volScale"
+            :value vol
+            :tooltip "${vol}%"
+            :onchange "amixer -D pulse sset Master {}%"
+            :icon volIcon)
+    (metric :class "micScale"
+            :value mic
+            :tooltip "${mic}%"
+            :onchange "amixer -D pulse sset Capture {}%"
+            :icon "")
+    (metric :class "brightScale"
+            :value bright
+            :tooltip "${bright}%"
+            :onchange ""
+            :icon "")
+    (metric :class "spaceScale"
+            :value space
+            :tooltip "${space}%"
+            :onchange ""
+            :icon "")))
+
+(defwidget metric [class value tooltip onchange icon]
+  (box :orientation "v"
+       :class "metric"
+       :space-evenly false
+       :spacing 20
+    (scale :min 0
+           :max 101
+           :orientation "v"
+           :flipped true
+           :class class
+           :value value
+           :tooltip tooltip
+           :onchange onchange)
+    (label :text icon :class "icon")))
+
+(defpoll mic    :interval "10s" "scripts/getmic")
+(defpoll vol    :interval "2s"  "scripts/volume value")
+(defpoll space  :interval "10m" "scripts/getspace")
+(defpoll bright :interval "2s"  "scripts/getbright")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget time[]
+  (box :orientation "v"
+       :halign "center"
+       :space-evenly false
+       :class "time"
+    (label :text hour
+           :class "hour")
+    (label :text date
+           :class "date")))
+
+(defpoll hour :interval "2s"  "date '+%H:%M'")
+(defpoll date :interval "10m" "date +%a,' '%b' '%d")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget control []
+  (box :class "control" :orientation "v" :spacing 10
+    (box :orientation "h" :spacing 10
+      (button :tooltip "Mute"      :class "mute ${volIcon == "墳" ? "muteActive" : "muteInactive"}" :onclick "amixer sset Master toggle" volIcon)
+      (button :tooltip "Bluetooth" :class "bt ${btIcon == "" ? "btInactive" : "btActive"}" :onclick "scripts/bluetooth toggle" btIcon))
+    (box :orientation "h" :spacing 10
+      (button :tooltip "Do Not Disturb" :class "dunst ${dunstIcon == "" ? "dunstActive" : "dunstInactive"}" :onclick "scripts/dunst toggle" dunstIcon)
+      (button :tooltip "Networking"     :class "net ${netIcon == "直" ? "netActive" : "netInactive"}"  :onclick "scripts/network toggle" netIcon))))
+
+(defpoll btIcon    :interval "2s"  "scripts/bluetooth icon")
+(defpoll volIcon   :interval "2s"  "scripts/volume icon")
+(defpoll netIcon   :interval "2s"  "scripts/network icon")
+(defpoll dunstIcon :interval "2s"  "scripts/dunst icon")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget circles []
+  (box :orientation "h" :spacing 20
+    (box :class "circles"
+      (circular-progress :value cpu
+                         :thickness 15
+                         :clockwise true
+                         :class "cpu"
+                         :tooltip "${cpu}%"
+        (label :text  ""
+               :class "cpuIcon")))
+    (box :class "circles"
+      (circular-progress :value ram
+                         :thickness 15
+                         :clockwise true
+                         :class "ram"
+                         :tooltip "${ram}%"
+        (label :text  ""
+               :class "ramIcon")))))
+
+(defpoll cpu :interval "10s" "scripts/getcpu")
+(defpoll ram :interval "10s" "scripts/getram")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget powerbuttons []
+  (box :orientation "h" :class "powerbuttons" :spacing 20
+    (button :class "shutdown" :tooltip "Shutdown" :onclick "systemctl poweroff" "")
+    (button :class "reboot"   :tooltip "Reboot"   :onclick "systemctl reboot" "")
+    (button :class "lock"     :tooltip "Lock"     :onclick "~/.local/bin/lock &" "")
+    (button :class "sleep"    :tooltip "Sleep"    :onclick "~/.local/bin/lock suspend &" "")
+    (button :class "logout"   :tooltip "Logout"   :onclick "killall $(wmctrl -m | grep Name | cut -d ' ' -f2)" "﫼")))

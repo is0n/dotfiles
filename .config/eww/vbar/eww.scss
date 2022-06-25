@@ -1,0 +1,200 @@
+@import "paradise.scss";
+
+* {
+  all: unset;
+}
+
+tooltip {
+  background-color: $background;
+  border-radius: 10px;
+  font-size: 14px;
+  border: 2px solid $foreground;
+  font-family: "JetBrains Mono";
+}
+
+.bar {
+  font-family: "JetBrains Mono";
+  border-radius: 10px;
+  background-color: $background;
+  color: $foreground;
+}
+
+.profile-btn {
+  background-color: $black;
+  border-radius: 10px 10px 0px 0px;
+  padding: 0px 10px 0px 10px;
+  font-size: 30px;
+  color: $cyan;
+}
+
+.shutdown, .reboot, .lock, .sleep, .logout {
+  color: $background;
+  font-size: 25px;
+  margin: 5px;
+  border-radius: 100%;
+}
+
+.shutdown {
+  color: $green;
+}
+
+.reboot {
+  color: $cyan;
+}
+
+.lock {
+  color: $yellow;
+}
+
+.sleep {
+  color: $magenta;
+}
+
+.logout {
+  color: $red;
+}
+
+.workspaces, .icon {
+  font-size: 25px;
+}
+
+.empty {
+  color: $altblack;
+}
+
+scale trough {
+  border-radius: 10px;
+  min-width: 0.4rem;
+  min-height: 4rem;
+  background-color: $black;
+}
+
+scale trough highlight {
+  border-radius: 10px;
+}
+
+.cpu trough highlight {
+  background-color: $red;
+}
+
+.ram trough highlight {
+  background-color: $green;
+}
+
+.mic trough highlight {
+  background-color: $magenta;
+}
+
+.vol trough highlight {
+  background-color: $blue;
+}
+
+.bright trough highlight {
+  background-color: $yellow;
+}
+
+.time {
+  background-color: $black;
+  border-radius: 0px 0px 10px 10px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.profile {
+  font-family: "JetBrains Mono";
+  background-color: $background;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid $foreground;
+}
+
+.pfp {
+  min-width: 150px;
+  min-height: 150px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  border: 1px solid $foreground;
+}
+
+.me {
+  padding: 1rem 0rem 0rem 0rem;
+  color: $magenta;
+  font-size: 14px;
+}
+
+.btn {
+  padding: 1rem 0rem 0rem 0rem;
+  font-size: 30px;
+  font-family: "JetBrainsMono Nerd Font";
+}
+
+.art {
+  min-height: 150px;
+  min-width: 150px;
+  border-radius: 10px;
+  border: 1px solid $foreground;
+}
+
+.info {
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid $foreground;
+}
+
+.firefox, .title, .prev {
+  color: $red;
+}
+
+.profile, .artist, .toggle {
+  color: $cyan;
+}
+
+.discord, .album, .next {
+  color: $magenta;
+}
+
+.line {
+  all: unset;
+  padding: 0px;
+  border: 1px solid $foreground;
+}
+
+.cal-out {
+  border: 1px solid $foreground;
+  border-radius: 10px;
+}
+
+.cal-in {
+  padding: 0px 10px 0px 10px;
+  color: $foreground;
+}
+
+.cal {
+  background-color: $background;
+  font-family: "JetBrains Mono";
+  font-size: 14px;
+  padding: 5px;
+}
+
+calendar:selected {
+  color: $magenta;
+}
+
+calendar.header {
+  color: $cyan;
+  font-weight: bold;
+}
+
+calendar.button {
+  color: $green;
+}
+
+calendar.highlight {
+  color: $blue;
+  font-weight: bold;
+}
+
+calendar:indeterminate {
+  color: $foreground;
+}

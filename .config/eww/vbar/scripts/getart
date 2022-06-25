@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# this only works with spotifyd + spotify-tui
+# this script is long and confusing b/c spotifyd sucks
+
+tmp_dir="/tmp/eww"
+tmp_cover_path="${tmp_dir}/cover.png"
+fallback="${HOME}/.config/eww/assets/fallback.png"
+
+mkdir -p "${tmp_dir}"
+
+if ! spt playback --share-track &>/dev/null; then
+  cp "${fallback}" "${tmp_cover_path}"
+  exit
+fi
+
+base_url="https://open.spotify.com/oembed?url=spotify:"
+keyword="https://i.scdn.co/image/[a-zA-Z0-9./?=_%:-]*"
+
+song_link="$(spt playback --share-track)"
+song_link="${song_link##*.com/}"
+song_link="${song_link//[\/]/:}"
+
+artlink="$(
+  curl -s "${base_url}${song_link}" |
+    grep -Eo "${keyword}"
+)"
+
+curl -s "${artlink}" > "${tmp_cover_path}";
+convert "${tmp_cover_path}" -resize 150x150 "${tmp_cover_path}"
