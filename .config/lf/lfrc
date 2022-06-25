@@ -149,6 +149,6 @@ map gs cd ~/Pictures/Screenshots/
 map gr cd ~/Videos/Recordings/
 map gc cd ~/.config/
 map gb cd ~/.local/bin/
-map gv cd ~/.config/nvim
+map gv cd /run/media/is0n/
 
 # vim:ft=sh

@@ -11,7 +11,7 @@
 		# Appearance
     width = 300
     height = 260
-    origin = top-right
+    origin = bottom-right
     offset = 12x12
 
 		# Progress bar
