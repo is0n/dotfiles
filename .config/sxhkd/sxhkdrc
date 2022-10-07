@@ -1,0 +1,66 @@
+# Floating Window
+hyper + {f,s,n,h,m,y,a,l}
+	floating {~/.config/lf/startlf, "pgrep mpd &>/dev/null || mpd &>/dev/null & ncmpcpp 2>/dev/null", nvim ~/Notes/Notes.md,htop,mangal, ytfzf -t, ani-cli, lobster}
+
+# Terminals
+super + Return
+	$TERMINAL
+
+super + shift + Return
+	floating $SHELL
+
+# System Control (volume/brightness)
+{F1,F2}
+	bright {-,+}
+
+XF86MonBrightness{Down,Up}
+	bright {-,+}
+
+{F10,XF86AudioMute}
+	amixer sset Master toggle
+
+{F11,F12}
+	amixer sset Master 5%{-,+}
+
+XF86Audio{Lower,Raise}Volume
+	amixer sset Master 5%{-,+}
+
+{F7,F8,F9}
+  mpc {prev,toggle,next}
+  # playerctl {previous,play-pause,next}
+
+# Restart sxhkd
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# Toggle screenkey
+hyper + s
+	pgrep screenkey && killall screenkey || screenkey -s small
+
+# Rofi
+super + {space}
+	rofi -disable-history -show drun
+
+# Bluetooth menu
+hyper + b
+	rofi-bluetooth
+
+# screenshot
+super + ctrl + {1,2,3}
+	screenshot {full,area,window}
+
+# screenrecord
+super + ctrl + 4
+	screenrecord
+
+# Eww
+hyper + {d,BackSpace}
+  {dashboard,powermenu} toggle
+
+# Color picker
+hyper + x
+  xcolorpick
+
+# Colorscheme picker
+hyper + c
+  colo

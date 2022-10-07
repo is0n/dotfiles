@@ -1,0 +1,454 @@
+# Colorschemes
+schemes:
+  amarena: &amarena
+    primary:
+      background: "#1A2026"
+      foreground: "#FFFFFF"
+
+    normal:
+      black:      "#242D35"
+      red:        "#FB6396"
+      green:      "#94CF95"
+      yellow:     "#F692B2"
+      blue:       "#6EC1D6"
+      magenta:    "#CD84C8"
+      cyan:       "#7FE4D2"
+      white:      "#FFFFFF"
+
+    bright:
+      black:      "#526170"
+      red:        "#F92D72"
+      green:      "#6CCB6E"
+      yellow:     "#F26190"
+      blue:       "#4CB9D6"
+      magenta:    "#C269BC"
+      cyan:       "#58D6BF"
+      white:      "#F4F5F2"
+
+  aquarium: &aquarium
+    primary:
+      background: "#20202A"
+      foreground: "#ced4df"
+
+    normal:
+      black:      "#44495E"
+      red:        "#EBB9B9"
+      green:      "#CAF6BB"
+      yellow:     "#EBE3B9"
+      blue:       "#CDDBF9"
+      magenta:    "#F6BBE7"
+      cyan:       "#B8DCEB"
+      white:      "#C6D0E9"
+
+    bright:
+      black:      "#3B3B4D"
+      red:        "#CC9B9D"
+      green:      "#A3CCAD"
+      yellow:     "#D1BA97"
+      blue:       "#B8C9EA"
+      magenta:    "#C497B3"
+      cyan:       "#95C2D1"
+      white:      "#63718B"
+
+  catppuccin: &catppuccin
+    primary:
+      background: "#1E1E2E"
+      foreground: "#CDD6F4"
+
+    normal:
+      black:      "#45475A"
+      red:        "#F38BA8"
+      green:      "#A6E3A1"
+      yellow:     "#F9E2AF"
+      blue:       "#89B4FA"
+      magenta:    "#F5C2E7"
+      cyan:       "#94E2D5"
+      white:      "#BAC2DE"
+
+    bright:
+      black:      "#585B70"
+      red:        "#F38BA8"
+      green:      "#A6E3A1"
+      yellow:     "#F9E2AF"
+      blue:       "#89B4FA"
+      magenta:    "#F5C2E7"
+      cyan:       "#94E2D5"
+      white:      "#A6ADC8"
+
+  code: &code
+    primary:
+      background: "#1e1e1e"
+      foreground: "#d4d4d4"
+
+    normal:
+      black:      "#1e1e1e"
+      red:        "#f44747"
+      green:      "#608b4e"
+      yellow:     "#dcdcaa"
+      blue:       "#569cd6"
+      magenta:    "#c678dd"
+      cyan:       "#56b6c2"
+      white:      "#d4d4d4"
+
+    bright:
+      black:      "#545454"
+      red:        "#f44747"
+      green:      "#608b4e"
+      yellow:     "#dcdcaa"
+      blue:       "#569cd6"
+      magenta:    "#c678dd"
+      cyan:       "#56b6c2"
+      white:      "#d4d4d4"
+
+  dark: &dark
+    primary:
+      background: "#181818"
+      foreground: "#D8D8D8"
+
+    normal:
+      black:      "#181818"
+      red:        "#AB4642"
+      green:      "#A1B56C"
+      yellow:     "#F7CA88"
+      blue:       "#7CAFC2"
+      magenta:    "#BA8BAF"
+      cyan:       "#86C1B9"
+      white:      "#D8D8D8"
+
+    bright:
+      black:      "#585858"
+      red:        "#DC9656"
+      green:      "#282828"
+      yellow:     "#383838"
+      blue:       "#B8B8B8"
+      magenta:    "#E8E8E8"
+      cyan:       "#A16946"
+      white:      "#F8F8F8"
+
+  decay: &decay
+    primary:
+      background: "#171a1f"
+      foreground: "#b6beca"
+
+    normal:
+      black:      "#1c252c"
+      red:        "#e05f65"
+      green:      "#78dba9"
+      yellow:     "#f1cf8a"
+      blue:       "#70a5eb"
+      magenta:    "#c68aee"
+      cyan:       "#74bee9"
+      white:      "#dee1e6"
+
+    bright:
+      black:      "#384148"
+      red:        "#fc7b81"
+      green:      "#94f7c5"
+      yellow:     "#ffeba6"
+      blue:       "#8cc1ff"
+      magenta:    "#e2a6ff"
+      cyan:       "#90daff"
+      white:      "#fafdff"
+
+  everblush: &everblush
+    primary:
+      background: "#141B1E"
+      foreground: "#DADADA"
+
+    normal:
+      black:      "#232A2D"
+      red:        "#E57474"
+      green:      "#8CCF7E"
+      yellow:     "#E5C76B"
+      blue:       "#67B0E8"
+      magenta:    "#C47FD5"
+      cyan:       "#6CBFBF"
+      white:      "#B3B9B8"
+
+    bright:
+      black:      "#2D3437"
+      red:        "#EF7E7E"
+      green:      "#96D988"
+      yellow:     "#F4D67A"
+      blue:       "#71BAF2"
+      magenta:    "#CE89DF"
+      cyan:       "#67CBE7"
+      white:      "#BDC3C2"
+
+  everforest: &everforest
+    primary:
+      background: "#2B3339"
+      foreground: "#D3C6AA"
+
+    normal:
+      black:      "#4B565C"
+      red:        "#E67E80"
+      green:      "#A7C080"
+      yellow:     "#DBBC7F"
+      blue:       "#7FBBB3"
+      magenta:    "#D699B6"
+      cyan:       "#83C092"
+      white:      "#D3C6AA"
+
+    bright:
+      black:      "#4B565C"
+      red:        "#E67E80"
+      green:      "#A7C080"
+      yellow:     "#DBBC7F"
+      blue:       "#7FBBB3"
+      magenta:    "#D699B6"
+      cyan:       "#83C092"
+      white:      "#D3C6AA"
+
+  grayscale: &grayscale
+    primary:
+      background: "#101010"
+      foreground: "#B9B9B9"
+
+    normal:
+      black:      "#101010"
+      red:        "#7C7C7C"
+      green:      "#8E8E8E"
+      yellow:     "#A0A0A0"
+      blue:       "#686868"
+      magenta:    "#747474"
+      cyan:       "#868686"
+      white:      "#B9B9B9"
+
+    bright:
+      black:      "#525252"
+      red:        "#999999"
+      green:      "#252525"
+      yellow:     "#464646"
+      blue:       "#ABABAB"
+      magenta:    "#E3E3E3"
+      cyan:       "#5E5E5E"
+      white:      "#F7F7F7"
+
+  gruvbox: &gruvbox
+    primary:
+      background: "#282828"
+      foreground: "#d5c4a1"
+
+    normal:
+      black:   "#282828"
+      red:     "#fb4934"
+      green:   "#b8bb26"
+      yellow:  "#fabd2f"
+      blue:    "#83a598"
+      magenta: "#d3869b"
+      cyan:    "#8ec07c"
+      white:   "#d5c4a1"
+
+    bright:
+      black:   "#665c54"
+      red:     "#fe8019"
+      green:   "#3c3836"
+      yellow:  "#504945"
+      blue:    "#bdae93"
+      magenta: "#ebdbb2"
+      cyan:    "#d65d0e"
+      white:   "#fbf1c7"
+
+  gruvbox-material: &gruvbox-material
+    primary:
+      background: "#282828"
+      foreground: "#d4be98"
+
+    normal:
+      black:      "#3c3836"
+      red:        "#ea6962"
+      green:      "#a9b665"
+      yellow:     "#d8a657"
+      blue:       "#7daea3"
+      magenta:    "#d3869b"
+      cyan:       "#89b482"
+      white:      "#d4be98"
+
+    bright:
+      black:      "#3c3836"
+      red:        "#ea6962"
+      green:      "#a9b665"
+      yellow:     "#d8a657"
+      blue:       "#7daea3"
+      magenta:    "#d3869b"
+      cyan:       "#89b482"
+      white:      "#d4be98"
+
+  monokai: &monokai
+    primary:
+      background: "#272822"
+      foreground: "#f8f8f2"
+
+    normal:
+      black:      "#272822"
+      red:        "#f92672"
+      green:      "#a6e22e"
+      yellow:     "#f4bf75"
+      blue:       "#66d9ef"
+      magenta:    "#ae81ff"
+      cyan:       "#a1efe4"
+      white:      "#f8f8f2"
+
+    bright:
+      black:      "#75715e"
+      red:        "#fd971f"
+      green:      "#383830"
+      yellow:     "#49483e"
+      blue:       "#a59f85"
+      magenta:    "#f5f4f1"
+      cyan:       "#cc6633"
+      white:      "#f9f8f5"
+
+  mountain: &mountain
+    primary:
+      background: "#0f0f0f"
+      foreground: "#f0f0f0"
+
+    normal:
+      black:      "#262626"
+      red:        "#ac8a8c"
+      green:      "#8aac8b"
+      yellow:     "#aca98a"
+      blue:       "#8f8aac"
+      magenta:    "#ac8aac"
+      cyan:       "#8aabac"
+      white:      "#e7e7e7"
+
+    bright:
+      black:      "#4c4c4c"
+      red:        "#c49ea0"
+      green:      "#9ec49f"
+      yellow:     "#c4c19e"
+      blue:       "#a39ec4"
+      magenta:    "#c49ec4"
+      cyan:       "#9ec3c4"
+      white:      "#f5f5f5"
+
+  nord: &nord
+    primary:
+      background: "#2E3440"
+      foreground: "#D8DEE9"
+
+    normal:
+      black:      "#3B4252"
+      red:        "#BF616A"
+      green:      "#A3BE8C"
+      yellow:     "#EBCB8B"
+      blue:       "#81A1C1"
+      magenta:    "#B48EAD"
+      cyan:       "#88C0D0"
+      white:      "#E5E9F0"
+
+    bright:
+      black:      "#4C566A"
+      red:        "#BF616A"
+      green:      "#A3BE8C"
+      yellow:     "#EBCB8B"
+      blue:       "#81A1C1"
+      magenta:    "#B48EAD"
+      cyan:       "#8FBCBB"
+      white:      "#ECEFF4"
+
+  onedark: &onedark
+    primary:
+      background: "#1E2127"
+      foreground: "#ABB2BF"
+
+    normal:
+      black:      "#1E2127"
+      red:        "#E06C75"
+      green:      "#98C379"
+      yellow:     "#D19A66"
+      blue:       "#61AFEF"
+      magenta:    "#C678DD"
+      cyan:       "#56B6C2"
+      white:      "#828791"
+
+    bright:
+      black:      "#5C6370"
+      red:        "#E06C75"
+      green:      "#98C379"
+      yellow:     "#D19A66"
+      blue:       "#61AFEF"
+      magenta:    "#C678DD"
+      cyan:       "#56B6C2"
+      white:      "#E6EFFF"
+
+  paradise: &paradise
+    primary:
+      background: "#151515"
+      foreground: "#E8E3E3"
+
+    normal:
+      black:      "#151515"
+      red:        "#B66467"
+      green:      "#8C977D"
+      yellow:     "#D9BC8C"
+      blue:       "#8DA3B9"
+      magenta:    "#A988B0"
+      cyan:       "#8AA6A2"
+      white:      "#E8E3E3"
+
+    bright:
+      black:      "#424242"
+      red:        "#B66467"
+      green:      "#8C977D"
+      yellow:     "#D9BC8C"
+      blue:       "#8DA3B9"
+      magenta:    "#A988B0"
+      cyan:       "#8AA6A2"
+      white:      "#E8E3E3"
+
+  rxyhn: &rxyhn
+    primary:
+      background: "#061115"
+      foreground: "#d9d7d6"
+
+    normal:
+      black:      "#1c252c"
+      red:        "#df5b61"
+      green:      "#78b892"
+      yellow:     "#de8f78"
+      blue:       "#6791c9"
+      magenta:    "#bc83e3"
+      cyan:       "#67afc1"
+      white:      "#d9d7d6"
+
+    bright:
+      black:      "#484e5b"
+      red:        "#df5b61"
+      green:      "#8cd7aa"
+      yellow:     "#e9967e"
+      blue:       "#79aaeb"
+      magenta:    "#c488ec"
+      cyan:       "#7acfe4"
+      white:      "#e5e5e5"
+
+  tokyonight: &tokyonight
+    primary:
+      background: "#15161E"
+      foreground: "#c0caf5"
+
+    normal:
+      black:      "#1a1b26"
+      red:        "#f7768e"
+      green:      "#9ece6a"
+      yellow:     "#e0af68"
+      blue:       "#7aa2f7"
+      magenta:    "#bb9af7"
+      cyan:       "#7dcfff"
+      white:      "#a9b1d6"
+
+    bright:
+      black:      "#414868"
+      red:        "#f7768e"
+      green:      "#9ece6a"
+      yellow:     "#e0af68"
+      blue:       "#7aa2f7"
+      magenta:    "#bb9af7"
+      cyan:       "#7dcfff"
+      white:      "#c0caf5"
+
+# Apply the color scheme.
+colors: *mountain

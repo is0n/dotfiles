@@ -1,0 +1,26 @@
+<svg
+   viewBox="0 0 48 48"
+   fill="none"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="minmize.svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <path
+     d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z"
+     fill="#dbbc7f"
+     stroke="#3a4248"
+     stroke-width="4"
+     stroke-linejoin="round"
+     id="path4" />
+  <path
+     d="M 31.999994,24 H 16.000006"
+     stroke="#2b3339"
+     stroke-width="4"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path6" />
+</svg>
