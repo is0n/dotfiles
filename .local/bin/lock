@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+IMAGE="$(cat ~/.cache/wallpaper)"
+DIMENSIONS="$(xdpyinfo | awk '/dimensions/ { print $2 }')"
+TEMP="$(mktemp)"
+
+cp "$IMAGE" "$TEMP"
+convert "$TEMP" -gravity Center -resize "$DIMENSIONS"^ -extent "$DIMENSIONS" "$TEMP"
+
+i3lock -i "$TEMP"
+rm "$TEMP"
+
+sleep 2
+
+[ "${1}" = "suspend" ] && systemctl suspend &
+
+exit
+
+# Colors
+clear="#00000000"
+fg="#dadada"
+bg="#141b1e"
+altfg="#b3b9b8"
+altbg="#2d3437"
+error="#e57474"
+verif="#8ccf7e"
+
+# Spawn the lockscreen
+i3lockmore -n \
+  --image-fill "$(cat ~/.cache/wallpaper)" \
+                               \
+  --verif-text=""              \
+  --wrong-text=""              \
+  --noinput-text=""            \
+  --ring-width 10              \
+  --radius 100                 \
+  --indicator                  \
+                               \
+  --insidever-color=$bg        \
+  --insidewrong-color=$bg      \
+                               \
+  --ringver-color=$verif       \
+  --ringwrong-color=$error     \
+                               \
+  --inside-color=$bg           \
+  --ring-color=$bg             \
+  --line-color=$altbg          \
+  --separator-color=$bg        \
+                               \
+  --verif-color=$fg            \
+  --wrong-color=$altfg         \
+  --layout-color=$fg           \
+  --keyhl-color=$altfg         \
+  --bshl-color=$altfg          &
+
+sleep 2
+
+# Launch eww widgets
+eww -c ~/.config/eww/lock/ close-all
+eww -c ~/.config/eww/lock/ open-many fetch music time quote
+
+sleep 1
+
+# Suspend if given the 'suspend' arg
+[ "${1}" = "suspend" ] && systemctl suspend &
+
+# Do not disturb
+dunstctl set-paused true
+
+# Wait until the lockscreen exits
+wait
+
+# Close the widgets
+eww -c ~/.config/eww/lock/ close-all
+
+# Disable Do not disturb
+dunstctl set-paused false

@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+
+# Colors
+c0="[30m"
+c1="[31m"
+c2="[32m"
+c3="[33m"
+c4="[34m"
+c5="[35m"
+c6="[36m"
+c7="[37m"
+
+# Components
+OS__="$(grep -oP '^NAME="\K[^"]+' /etc/os-release)"
+WM__="$(wmctrl -m | awk '/Name/ { print $2 }')"
+SH__="${SHELL##*/}"
+TERM="$(ps -o comm= -p "$(($(ps -o ppid= -p "$(($(ps -o sid= -p "$$")))")))")"
+PKGS="$(pacman -Q | wc -l) (pacman)"
+UP__="$(uptime -p | sed -e 's/up //;s/ day/d/;s/ hours/h/;s/ minutes/m/')"
+BTNS="  "
+LINE="─"
+
+COMPONENTS=( "$OS__" "$WM__" "$SH__" "$TERM" "$PKGS" "$UP__" )
+
+LENGTH=0
+for COMPONENT in "${COMPONENTS[@]}"; do
+  if [ ${#COMPONENT} -ge $LENGTH ]; then
+    LENGTH=${#COMPONENT}
+  fi
+done
+
+DIFF=$(( $LENGTH - ${#LINE}))
+for i in $(seq $DIFF); do
+  LINE+="─"
+done
+LINE=${LINE:5}
+
+DIFF=$(( $LENGTH - ${#BTNS}))
+PADDING=""
+for i in $(seq $DIFF); do
+  PADDING+=" "
+done
+
+BTNS="$PADDING$BTNS"
+BTNS=`sed "s||${c3}|" <<< "$BTNS"`
+BTNS=`sed "s||${c2}|" <<< "$BTNS"`
+BTNS=`sed "s||${c1}|" <<< "$BTNS"`
+BTNS=`sed "s|\$|${c7}|" <<< "$BTNS"`
+
+NEW_COMPONENTS=()
+for COMPONENT in "${COMPONENTS[@]}"; do
+  if [ ${#COMPONENT} -le $LENGTH ]; then
+    DIFF=$(( $LENGTH - ${#COMPONENT}))
+
+    for i in $(seq $DIFF); do
+      COMPONENT+=" "
+    done
+
+    NEW_COMPONENTS+=( "$COMPONENT" )
+  fi
+done
+
+OS__="${c7}${NEW_COMPONENTS[0]}"
+WM__="${c7}${NEW_COMPONENTS[1]}"
+SH__="${c7}${NEW_COMPONENTS[2]}"
+TERM="${c7}${NEW_COMPONENTS[3]}"
+PKGS="${c7}${NEW_COMPONENTS[4]}"
+UP__="${c7}${NEW_COMPONENTS[5]}"
+CHAR=""
+
+# Fetch
+cat << EOF
+[1m
+${c6}         .         ${c7} ╭──────────${LINE}─╮
+${c6}        / \        ${c7} │ ${c1}   ${BTNS} │ ${c1} ${CHAR}
+${c6}       /   \       ${c7} │──────────${LINE}─│ ${c2} ${CHAR}
+${c6}      /\    \      ${c7} │ ${c2} : ${OS__} │ ${c3} ${CHAR}
+${c6}     /       \     ${c7} │ ${c3} : ${WM__} │ ${c4} ${CHAR}
+${c6}    /   .-.   \    ${c7} │ ${c4} : ${SH__} │ ${c5} ${CHAR}
+${c6}   /   (   )  -\   ${c7} │ ${c5} : ${TERM} │ ${c6} ${CHAR}
+${c6}  / -.~     ~.- \  ${c7} │ ${c6} : ${PKGS} │ ${c7} ${CHAR}
+${c6} /.^           ^.\ ${c7} ╰──────────${LINE}─╯
+[0m
+EOF
+
+
+# Dead simple fetch :(
+# ${c6}        .        ${c7} ╭─────────────────────╮
+# ${c6}       / \       ${c1}    ${c7}: ${OS__}
+# ${c6}      /   \      ${c2}    ${c7}: ${WM__}
+# ${c6}     /     \     ${c3}    ${c7}: ${SH__}
+# ${c6}    /  .-.  \    ${c4}    ${c7}: ${TERM}
+# ${c6}   /  (   )  \   ${c5}    ${c7}: ${PKGS}
+# ${c6}  / -.~   ~.- \  ${c7} ╰─────────────────────╯
+# ${c6} /.^         ^.\ ${c7}   ${c1}  ${c2}  ${c3}  ${c4}  ${c5}  ${c6}  ${c7}

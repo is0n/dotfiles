@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+alacritty \
+	--class "Floating" \
+	-o window.dimensions.lines=25 \
+	-o window.dimensions.columns=100 \
+	-e "zsh" \
+	-c "sleep 0.05 && $*"

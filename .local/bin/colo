@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+EWW_FILES=( "$HOME/.config/eww/lock/eww.scss" "$HOME/.config/eww/dashboard/eww.scss" "$HOME/.config/eww/vbar/eww.scss" "$HOME/.config/eww/powermenu/eww.scss" )
+TERM_FILE="$HOME/.config/alacritty/colors.yml"
+SERVERS=$(nvr --serverlist)
+NVIM_FILE="$HOME/.config/nvim/lua/user/colors.lua"
+ROFI_FILE="$HOME/.config/rofi/config.rasi"
+AWESOME_FILE="$HOME/.config/awesome/theme/theme.lua"
+
+# Get theme
+CURRENT_THEME=$(grep -oP 'colors: \*\K.*' "$TERM_FILE")
+CURRENT_THEME="${CURRENT_THEME//-/ }"
+CURRENT_THEME="$(sed 's/\(^\| \)\([a-z]\)/\1\u\2/g' <<< "$CURRENT_THEME")"
+THEMES=( "Amarena" "Aquarium" "Catppuccin" "Code" "Dark" "Decay" "Everblush" "Everforest" "Grayscale" "Gruvbox" "Gruvbox Material" "Monokai" "Mountain" "Nord" "Onedark" "Paradise" "Rxyhn" "Tokyonight" )
+
+THEME="$1"
+
+if [ -z "$THEME" ]; then
+  THEME=$(printf "%s\n" "${THEMES[@]}" | rofi -dmenu -i -p "Current Theme: ${CURRENT_THEME}")
+fi
+
+[ -z "$THEME" ] && exit
+
+THEME="${THEME,,}"
+THEME="${THEME// /-}"
+
+VALID=false
+for COLORSCHEME in "${THEMES[@]}"; do
+  COLORSCHEME="${COLORSCHEME,,}"
+  COLORSCHEME="${COLORSCHEME// /-}"
+
+  if [ "$THEME" == "$COLORSCHEME" ]; then
+    VALID=true
+  fi
+done
+
+if [ "$VALID" == "false" ]; then
+  exit
+fi
+
+# Update EWW colors
+for FILE in ${EWW_FILES[@]}; do
+  sed -i "s/@import.*/@import '..\/themes\/$THEME.scss';/" "$FILE"
+done
+
+# Update alacritty theme
+sed -i "s/colors:.*/colors: \*$THEME/" "$TERM_FILE"
+
+# Update neovim theme
+for SERVER in $SERVERS; do
+  nvr --servername $SERVER --remote-send ":lua SetBase16('$THEME')<CR>"
+done
+
+# Set neovim theme
+sed -i "s/SetBase16('.*/SetBase16('$THEME')/" "$NVIM_FILE"
+
+# Set rofi theme
+sed -i "s/@import.*/@import \"themes\/$THEME.rasi\"/" "$ROFI_FILE"
+
+# Set awesome colors
+sed -i "s/local theme_name = .*/local theme_name = '$THEME'/" "$AWESOME_FILE"
+
+# Update awesome
+awesome-client 'awesome.restart()'
