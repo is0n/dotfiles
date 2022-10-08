@@ -1,0 +1,65 @@
+@import "../themes/everblush.scss";
+
+* {
+  all: unset;
+  font-family: JetBrains Mono;
+}
+
+button:hover {
+  color: $altblack;
+}
+
+tooltip {
+  background-color: $background;
+  border-radius: 10px;
+  font-size: 14px;
+  border: 2px solid $foreground;
+}
+
+.bar {
+  border-radius: 10px;
+  padding: 0px 15px 0px 15px;
+  background-color: $background;
+  color: $foreground;
+}
+
+.dashboard {
+  font-size: 25px;
+  color: $blue;
+}
+
+.workspaces, .label {
+  font-size: 25px;
+}
+
+.text {
+  font-size: 14px;
+}
+
+scale trough highlight {
+  all: unset;
+  color: #000000;
+  border-radius: 10px;
+}
+
+.bright trough highlight {
+  background-color: $yellow;
+}
+
+.cpu trough highlight {
+  background-color: $red;
+}
+
+.ram trough highlight {
+  background-color: $green;
+}
+
+scale trough {
+  all: unset;
+  background-color: $black;
+  border-radius: 50px;
+  min-height: 3px;
+  min-width: 50px;
+  margin-left: 10px;
+  margin-right: 20px;
+}

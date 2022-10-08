@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+COLOR="$1"
+THEME="$(grep -Eo "/.*'" "$HOME/.config/eww/vbar/eww.scss")"
+THEME_PATH="$HOME/.config/eww/${THEME:1:-1}"
+
+HEX=$(awk "/$COLOR/ { print \$2 }" $THEME_PATH)
+HEX="${HEX:1:-1}"
+
+RGB=$(printf "%d %d %d\n" 0x${HEX:0:2} 0x${HEX:2:2} 0x${HEX:4:2})
+echo "$RGB" | sed 's/ /, /g'

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+function status {
+  if spt playback --share-track &>/dev/null; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+function art {
+  echo "/tmp/eww/cover.png"
+}
+
+function title {
+  if status; then
+    spt playback --format '%t'
+  else
+    echo "N/A"
+  fi
+}
+
+function artist {
+  if status; then
+    spt playback --format '%a'
+  else
+    echo "N/A"
+  fi
+}
+
+function album {
+  if status; then
+    spt playback --format '%b'
+  else
+    echo "N/A"
+  fi
+}
+
+case "$1" in
+  art)
+    art;;
+  title)
+    title;;
+  artist)
+    artist;;
+  album)
+    album;;
+esac

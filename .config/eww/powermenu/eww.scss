@@ -1,0 +1,62 @@
+@import '../themes/mountain.scss';
+
+* {
+  all: unset;
+}
+
+// button:hover {
+//   color: $altblack;
+//   border: 3px solid $altblack;
+//   font-size: 25px;
+// }
+
+tooltip {
+  background-color: $background;
+  border-radius: 10px;
+  font-size: 14px;
+  border: 2px solid $foreground;
+}
+
+.powermenu {
+  background-color: $background;
+  padding: 20px;
+  border: 1px solid $foreground;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.shutdown, .sleep, .close, .reboot, .lock, .logout {
+  font-size: 40px;
+  background-color: $black;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.shutdown {
+  color: $blue;
+  border: 3px solid $blue;
+}
+
+.reboot {
+  color: $magenta;
+  border: 3px solid $magenta;
+}
+
+.lock {
+  color: $green;
+  border: 3px solid $green;
+}
+
+.sleep {
+  color: $cyan;
+  border: 3px solid $cyan;
+}
+
+.logout {
+  color: $yellow;
+  border: 3px solid $yellow;
+}
+
+.close {
+  color: $red;
+  border: 3px solid $red;
+}

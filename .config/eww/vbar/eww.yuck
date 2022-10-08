@@ -1,0 +1,113 @@
+(defwindow vbar
+  :geometry (geometry
+    :x "6px"
+    :height "98%"
+    :width "35px"
+    :anchor "left center")
+  :stacking "fg"
+  :windowtype "dock"
+  :reserve (struts :side "left" :distance "42px")
+  (bar))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget bar []
+  (box :class "bar"
+       :orientation "v"
+    (top)
+    (center)
+    (btm)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget top []
+  (box :valign "start" :orientation "v" :spacing 5 :space-evenly false
+    (eventbox :onhover "~/.local/bin/dashboard open &"
+      (button :class "dashboard" :onclick "~/.local/bin/dashboard toggle &" ""))
+    (powerbuttons)))
+
+(defwidget powerbuttons []
+  (eventbox :onhover "eww -c . update showbuttons=true"
+            :onhoverlost "eww -c . update showbuttons=false"
+    (box :space-evenly false :spacing 10 :orientation "v"
+      (button :class "logout"   :tooltip "Logout"   :onclick "killall $(wmctrl -m | awk '/Name/ { print $2 }')" "")
+      (revealer :transition "slidedown"
+                :reveal showbuttons
+                :duration "500ms"
+        (box :orientation "v" :spacing 10
+          (button :class "sleep"    :tooltip "Sleep"    :onclick "~/.local/bin/lock suspend &" "")
+          (button :class "lock"     :tooltip "Lock"     :onclick "~/.local/bin/lock &" "")
+          (button :class "reboot"   :tooltip "Reboot"   :onclick "systemctl reboot" "")
+          (button :class "shutdown" :tooltip "Shutdown" :onclick "systemctl poweroff" ""))))))
+
+(defvar showbuttons false)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget center []
+  (box :valign "center"
+    (literal :content ws)))
+
+(deflisten ws "scripts/workspaces")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget btm []
+  (box :orientation "v"
+       :space-evenly false
+       :valign "end"
+       :spacing 10
+    (metric :reveal showcpu
+            :class "cpu"
+            :value cpu
+            :tooltip "${cpu}%"
+            :onchange ""
+            :icon "")
+    (metric :reveal showbright
+            :class "bright"
+            :value bright
+            :tooltip "${bright}%"
+            :onchange ""
+            :icon "")
+    (metric :reveal showram
+            :class "ram"
+            :value ram
+            :tooltip "${ram}%"
+            :onchange ""
+            :icon "")
+    (metric :reveal showvol
+            :class "vol"
+            :value vol
+            :tooltip "${vol}%"
+            :onchange "amixer -D pulse sset Master {}%"
+            :icon volIcon)
+    (box :class "time" time)))
+
+(defwidget metric [reveal class value tooltip onchange icon]
+  (eventbox :onhover "eww -c . update show${class}=true"
+            :onhoverlost "eww -c . update show${class}=false"
+    (box :space-evenly false :spacing 3 :orientation "v"
+      (revealer :transition "slideup"
+                :reveal reveal
+                :duration "500ms"
+        (scale :min 0
+               :max 100
+               :orientation "v"
+               :flipped true
+               :class class
+               :value value
+               :tooltip tooltip
+               :onchange onchange))
+      (label :class "icon ${class}Icon" :text icon))))
+
+(defvar showcpu    false)
+(defvar showram    false)
+(defvar showvol    false)
+(defvar showbright false)
+
+(defpoll cpu     :interval "2s" "scripts/getcpu")
+(defpoll ram     :interval "2s" "scripts/getram")
+(defpoll vol     :interval "2s"  "scripts/volume value")
+(defpoll bright  :interval "2s"  "scripts/getbright")
+(defpoll volIcon :interval "2s"  "scripts/volume icon")
+(defpoll time    :interval "1s"  "date '+%H%n%M'")

@@ -1,0 +1,118 @@
+@import '../themes/mountain.scss';
+
+* {
+  all: unset;
+}
+
+tooltip {
+  background-color: $background;
+  border-radius: 10px;
+  font-size: 14px;
+  border: 2px solid $foreground;
+  font-family: "JetBrains Mono";
+}
+
+.bar {
+  font-family: "JetBrains Mono";
+  border-radius: 10px;
+  background-color: $background;
+  color: $foreground;
+  border: 1px solid $foreground;
+}
+
+.dashboard {
+  font-family: "JetBrains Mono";
+  background-color: $black;
+  border-radius: 10px 10px 0px 0px;
+  padding: 0px 10px 0px 10px;
+  font-size: 30px;
+  color: $cyan;
+}
+
+.shutdown, .reboot, .lock, .sleep, .logout {
+  margin: 5px;
+  border-radius: 100%;
+  font-size: 25px;
+}
+
+.shutdown {
+  color: $green;
+}
+
+.reboot {
+  color: $cyan;
+}
+
+.lock {
+  color: $yellow;
+}
+
+.sleep {
+  color: $magenta;
+}
+
+.logout {
+  color: $red;
+}
+
+.icon {
+  font-size: 25px;
+}
+
+.empty {
+  color: $altblack;
+}
+
+scale trough {
+  border-radius: 10px;
+  min-width: 0.4rem;
+  min-height: 4rem;
+  background-color: $black;
+}
+
+scale trough highlight {
+  border-radius: 10px;
+}
+
+.cpu trough highlight {
+  background-color: $red;
+}
+
+.ram trough highlight {
+  background-color: $cyan;
+}
+
+.vol trough highlight {
+  background-color: $green;
+}
+
+.bright trough highlight {
+  background-color: $yellow;
+}
+
+.cpuIcon {
+  color: $red;
+}
+
+.ramIcon {
+  color: $cyan;
+}
+
+.volIcon {
+  color: $green;
+}
+
+.brightIcon {
+  color: $yellow;
+}
+
+.time {
+  background-color: $black;
+  border-radius: 0px 0px 10px 10px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.workspaces {
+  font-size: 25px;
+}

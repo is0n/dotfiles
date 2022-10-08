@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+TEMP=$(sensors | awk '/Package/ { print $4 }')
+
+echo ${TEMP:1:2}

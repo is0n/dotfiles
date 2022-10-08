@@ -1,0 +1,81 @@
+@import '../themes/mountain.scss';
+
+* {
+  all: unset;
+  font-family: JetBrains Mono;
+}
+
+.music, .fetch, .time, .quote, .bat {
+  background-color: $background;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid $foreground;
+}
+
+.art {
+  background-size: 150px;
+  min-height: 150px;
+  min-width: 150px;
+  border-radius: 10px;
+  border: 1px solid $foreground;
+}
+
+.fetch {
+  min-height: 150px;
+  min-width: 150px;
+}
+
+.info {
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  border: 1px solid $foreground;
+}
+
+.os, .title {
+  color: $green;
+}
+
+.wm, .artist {
+  color: $cyan;
+}
+
+.usr, .album {
+  color: $yellow;
+}
+
+.hst {
+  color: $red;
+}
+
+.pkg {
+  color: $blue;
+}
+
+.uptime {
+  color: $magenta;
+}
+
+.label {
+  font-size: 30px;
+}
+
+.hour {
+  font-size: 60px;
+  color: $blue;
+}
+
+.date {
+  font-size: 30px;
+  color: $magenta;
+}
+
+.batIcon {
+  margin: 2.5rem;
+  font-size: 40px;
+  color: $green;
+}
+
+.bat {
+  color: $green;
+  background-color: $background;
+}

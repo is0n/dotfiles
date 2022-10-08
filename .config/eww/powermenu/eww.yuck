@@ -1,0 +1,15 @@
+(defwindow powermenu
+  :geometry (geometry :anchor "center bottom")
+  :stacking "fg"
+  :windowtype "dock"
+  :reserve (struts :side "bottom" :distance "0px")
+  (powermenu))
+
+(defwidget powermenu []
+  (box :orientation "h" :class "powermenu" :spacing 20 :halign "center"
+    (button :class "shutdown" :tooltip "Shutdown" :onclick "systemctl poweroff" "")
+    (button :class "reboot"   :tooltip "Reboot"   :onclick "systemctl reboot" "")
+    (button :class "lock"     :tooltip "Lock"     :onclick "~/.local/bin/lock &" "")
+    (button :class "sleep"    :tooltip "Sleep"    :onclick "~/.local/bin/lock suspend &" "")
+    (button :class "logout"   :tooltip "Logout"   :onclick "killall $(wmctrl -m | awk '/Name/ { print $2 }')" "")
+    (button :class "close"    :tooltip "Close"    :onclick "~/.local/bin/powermenu close" "")))

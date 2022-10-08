@@ -1,0 +1,77 @@
+(defwindow hbar
+  :monitor 0
+  :geometry (geometry
+    :y "6px"
+    :width "98%"
+    :height "35px"
+    :anchor "top center")
+  :stacking "fg"
+  :windowtype "dock"
+  :reserve (struts :side "top" :distance "42px")
+  (bar))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget bar []
+  (box :class "bar" :orientation "h"
+    (left)
+    (center)
+    (right)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget left []
+  (box :class "left" :orientation "h" :halign "start" :valign "center" :space-evenly false :spacing 20
+    (eventbox :class "dashboard"
+              :onhover "~/.local/bin/dashboard &"
+      (button :onclick "~/.local/bin/dashboard &" ""))
+    (literal :content ws)))
+
+(deflisten ws      "scripts/workspaces")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget center []
+  (box :class "center" :orientation "h" :halign "center" :space-evenly false :spacing 10
+    (label :class "label" :text "")
+    (label :class "text"  :text title)))
+
+(deflisten title   "scripts/gettitle")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget right []
+  (box :class "right" :orientation "h" :halign "end" :space-evenly false
+    (metric :label ""
+            :class "cpu"
+            :value cpu
+            :tooltip "${cpu}%"
+            :onchange "")
+    (metric :label ""
+            :class "ram"
+            :value ram
+            :tooltip "${ram}%"
+            :onchange "")
+    (metric :label ""
+            :class "bright"
+            :value bright
+            :tooltip "${bright}%"
+            :onchange "")
+    (label :class "text" :text time)))
+
+(defwidget metric [label class value tooltip onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" label)
+    (scale :min 0
+           :max 101
+           :class class
+           :value value
+           :tooltip tooltip
+           :onchange onchange)))
+
+(defpoll ram     :interval "10s" "scripts/getram")
+(defpoll cpu     :interval "10s" "scripts/getcpu")
+(defpoll time    :interval "1s"  "date '+%H:%M'")
+(defpoll bright  :interval "2s"  "scripts/getbright")

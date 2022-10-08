@@ -1,0 +1,199 @@
+@import '../themes/mountain.scss';
+
+* {
+  all: unset;
+}
+
+tooltip {
+  background-color: $background;
+  border-radius: 10px;
+  font-size: 14px;
+  border: 2px solid $foreground;
+}
+
+.dashboard {
+  border-radius: 10px 0px 0px 10px;
+  padding: 20px;
+  background-color: $background;
+  color: $foreground;
+  border: 1px solid $foreground;
+  font-family: JetBrains Mono;
+}
+
+.profile, .fetch, .time, .control, .sliders, .powerbuttons, .space {
+  background-color: $black;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.pfp {
+  background-image: url('../assets/pfp.png');
+  min-width: 125px;
+  min-height: 125px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  border: 1px solid $altblack;
+}
+
+.me {
+  padding: 1rem 0rem 0rem 0rem;
+  color: $blue;
+}
+
+.spaceCircle {
+  color: $cyan;
+  background-color: $background;
+}
+
+.spaceIcon {
+  margin: 2.5rem;
+  font-size: 50px;
+}
+
+.label {
+  font-size: 30px;
+}
+
+.hour {
+  color: $blue;
+  font-size: 30px;
+}
+
+.date {
+  color: $magenta;
+  font-size: 15px;
+}
+
+.dunst, .bt, .mute, .net {
+  color: $background;
+  border-radius: 10px;
+  font-size: 30px;
+}
+
+.muteActive, .volScale trough highlight {
+  background-color: $green;
+}
+
+.btActive, .ramScale trough highlight {
+  background-color: $cyan;
+}
+
+.dunstActive, .brightScale trough highlight {
+  background-color: $yellow;
+}
+
+.netActive, .cpuScale trough highlight {
+  background-color: $red;
+}
+
+.dunstInactive, .btInactive, .muteInactive, .netInactive {
+  background-color: $altblack;
+}
+
+.icon {
+  font-size: 30px;
+}
+
+scale trough {
+  border-radius: 10px;
+  min-width: 1.1rem;
+  min-height: 10rem;
+  background-color: $background;
+}
+
+scale trough highlight {
+  border-radius: 10px;
+}
+
+.shutdown, .reboot, .lock, .sleep, .logout {
+  color: $background;
+  border-radius: 10px;
+}
+
+.reboot, .lock, .logout {
+  font-size: 30px;
+}
+
+.shutdown {
+  background-color: $green;
+  font-size: 20px;
+}
+
+.reboot {
+  background-color: $cyan;
+}
+
+.lock {
+  background-color: $yellow;
+}
+
+.sleep {
+  background-color: $red;
+  font-size: 20px;
+}
+
+.logout {
+  background-color: $blue;
+}
+
+.art {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: $black;
+  border-radius: 10px;
+  min-height: 150px;
+  min-width: 250px;
+}
+
+.musicInfo {
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.player {
+  font-size: 25px;
+  font-family: "JetBrainsMono Nerd Font";
+  background-color: $black;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.cpu {
+  color: $red;
+}
+
+.ram {
+  color: $cyan;
+  margin: 0px 0px 5px 0px;
+}
+
+.bright {
+  color: $yellow;
+}
+
+.vol {
+  color: $green;
+}
+
+.thermometer {
+  background-color: $red;
+  border-radius: 10px;
+  font-size: 30px;
+  padding: 20px;
+}
+
+.tempValue {
+  background-color: $black;
+  border-radius: 10px;
+}
+
+.temp {
+  background-color: $black;
+  border-radius: 10px;
+}
+
+.tempGraph {
+  color: $red;
+}

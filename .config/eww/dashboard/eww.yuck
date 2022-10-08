@@ -1,0 +1,187 @@
+(defwindow dashboard
+  :geometry (geometry :anchor "center right")
+  :stacking "fg"
+  :windowtype "dock"
+  :reserve (struts :side "right" :distance "0px")
+  (dashboard))
+
+(defwidget dashboard []
+  (box :orientation "v" :space-evenly false :class "dashboard" :spacing 20 :halign "center"
+    (info)
+    (mid)
+    (music)
+    (temp)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget info []
+  (box :class "info" :space-evenly false :spacing 20
+    (profile)
+    (space)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget profile []
+  (box :orientation "v" :space-evenly false :class "profile" :halign "center"
+    (box :class "pfp" :valign "center")
+    (label :class "me" :text "[${usr}@${hst}]")))
+
+(defpoll usr :interval "24h" "whoami")
+(defpoll hst :interval "24h" "uname -n")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget space []
+  (box  :space-evenly true
+        :class "space"
+    (box :space-evenly false
+         :orientation "v"
+         :spacing 25
+      (label :halign "start" :style "font-weight: bold;" :text "SPACE:")
+      (circular-progress :value space
+                         :thickness 6
+                         :clockwise true
+                         :class "spaceCircle"
+                         :tooltip "${space}%"
+        (label :text  ""
+               :class "spaceIcon")))))
+
+(defpoll space :interval "24h" "scripts/getspace")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget mid []
+  (box :class "mid" :space-evenly false :spacing 20
+    (box :orientation "v" :space-evenly false :spacing 20
+      (time)
+      (control))
+    (box :orientation "h" :halign "end"
+      (sliders))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget sliders []
+  (box :orientation "h" :space-evenly false :class "sliders" :halign "start" :valign "center" :spacing 20
+    (metric :class "volScale"
+            :value vol
+            :tooltip "${vol}%"
+            :onchange "amixer -D pulse sset Master {}%"
+            :icon volIcon
+            :iconClass "vol")
+    (metric :class "ramScale"
+            :value ram
+            :tooltip "${ram}%"
+            :onchange ""
+            :icon ""
+            :iconClass "ram")
+    (metric :class "brightScale"
+            :value bright
+            :tooltip "${bright}%"
+            :onchange ""
+            :icon ""
+            :iconClass "bright")
+    (metric :class "cpuScale"
+            :value cpu
+            :tooltip "${cpu}%"
+            :onchange ""
+            :icon ""
+            :iconClass "cpu")))
+
+(defwidget metric [class value tooltip onchange icon iconClass]
+  (box :orientation "v"
+       :class "metric"
+       :space-evenly false
+       :spacing 20
+    (scale :min 0
+           :max 101
+           :orientation "v"
+           :flipped true
+           :class class
+           :value value
+           :tooltip tooltip
+           :onchange onchange)
+    (label :text icon :class "icon ${iconClass}")))
+
+(defpoll vol    :interval "2s"  "scripts/volume value")
+(defpoll cpu    :interval "2s" "scripts/getcpu")
+(defpoll ram    :interval "2s" "scripts/getram")
+(defpoll bright :interval "2s"  "scripts/getbright")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget time[]
+  (box :orientation "v"
+       :halign "center"
+       :space-evenly false
+       :class "time"
+    (label :text hour
+           :class "hour")
+    (label :text date
+           :class "date")))
+
+(defpoll hour :interval "2s"  "date '+%H:%M'")
+(defpoll date :interval "10m" "date +%a,' '%b' '%d")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget control []
+  (box :class "control" :orientation "v" :spacing 10
+    (box :orientation "h" :spacing 10
+      (button :tooltip "Mute"      :class "mute ${volIcon == "墳" ? "muteActive" : "muteInactive"}" :onclick "amixer sset Master toggle" volIcon)
+      (button :tooltip "Bluetooth" :class "bt ${btIcon == "" ? "btInactive" : "btActive"}" :onclick "scripts/bluetooth toggle" btIcon))
+    (box :orientation "h" :spacing 10
+      (button :tooltip "Do Not Disturb" :class "dunst ${dunstIcon == "" ? "dunstActive" : "dunstInactive"}" :onclick "scripts/dunst toggle" dunstIcon)
+      (button :tooltip "Networking"     :class "net ${netIcon == "直" ? "netActive" : "netInactive"}"  :onclick "scripts/network toggle" netIcon))))
+
+(defpoll btIcon    :interval "2s"  "scripts/bluetooth icon")
+(defpoll volIcon   :interval "2s"  "scripts/volume icon")
+(defpoll netIcon   :interval "2s"  "scripts/network icon")
+(defpoll dunstIcon :interval "2s"  "scripts/dunst icon")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget music []
+  (box :class "music" :spacing 20 :space-evenly false
+    (box :class "art" :space-evenly false :style "background-image: linear-gradient(to right, black, transparent), url('${cover}');" art
+      (box :orientation "v" :class "musicInfo"
+        (label :text "Spotify:"
+               :style "font-weight: bold;"
+               :halign "start")
+        (label :text "${title}"
+               :limit-width 15
+               :style "font-size: 19px;"
+               :halign "start")
+        (label :text "${artist}"
+               :limit-width 20
+               :halign "start")))
+    (box :class "player" :orientation "v" :spacing 20
+      (button :onclick "spt playback -p &" "玲")
+      (button :onclick "spt playback -t &" "")
+      (button :onclick "spt playback -n &" "怜"))))
+
+(defpoll cover  :interval "5s"  "scripts/getmusic art")
+(defpoll title  :interval "5s"  "scripts/getmusic title")
+(defpoll artist :interval "5s"  "scripts/getmusic artist")
+(defpoll art    :interval "5s"  "scripts/getart")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget temp []
+  (box :space-evenly false :spacing 20
+    (box :orientation "v" :spacing 15
+      (box :class "thermometer" "")
+      (box :class "tempValue" "${round((((EWW_TEMPS.CORE_0+EWW_TEMPS.CORE_1)/2)), 0)}
+°C"))
+    (box :class "temp"
+      (graph :value "${round((EWW_TEMPS.CORE_0+EWW_TEMPS.CORE_1)/2, 0)}" ; Cries in dual core :'(
+             :style "background-color: rgba(${red}, 0.3);"
+             :class "tempGraph"
+             :thickness 3
+             :time-range "8s"
+             :dynamic true
+             :height 150
+             :width 250
+             :min 0
+             :max 151))))
+
+(defpoll red   :interval "24h" "scripts/getcolor red")
