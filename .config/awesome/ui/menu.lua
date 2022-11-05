@@ -1,8 +1,6 @@
 local awful = require("awful")
-local gears = require("gears")
 local bling = require("bling")
 local hotkeys_popup = require("awful.hotkeys_popup")
-local beautiful = require("beautiful")
 
 local layouts = {
   { "Dwindle", function() awful.layout.set(awful.layout.suit.spiral.dwindle) end },
@@ -25,7 +23,7 @@ local system = {
 
 local menu = awful.menu({
   items = {
-    { "Awesome", awesome, beautiful.awesome_icon },
+    { "Awesome", awesome },
     { "Layouts", layouts },
     { "System", system },
     { "Browser", "firefox" },
@@ -37,8 +35,6 @@ local menu = awful.menu({
   }
 })
 
-menu.wibox.shape = function(cr, w, h) gears.shape.rounded_rect(cr, w, h, 0) end
-
 client.connect_signal("request::default_mousebindings", function()
   awful.mouse.append_global_mousebindings({
     awful.button({}, 3, function()
@@ -49,3 +45,5 @@ client.connect_signal("request::default_mousebindings", function()
     end)
   })
 end)
+
+return menu

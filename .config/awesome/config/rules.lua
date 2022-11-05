@@ -37,16 +37,6 @@ ruled.client.connect_signal("request::rules", function()
 
   ruled.client.append_rule({
     rule_any = {
-      name = { "Android Emulator - Pixel_API_30:5554" },
-      class = { "Android Emulator - Pixel_API_30:5554" },
-      instance = { "Android Emulator - Pixel_API_30:5554" }
-    },
-
-    properties = { floating = true, titlebars_enabled = false }
-  })
-
-  ruled.client.append_rule({
-    rule_any = {
       instance = { "Floating" }
     },
 

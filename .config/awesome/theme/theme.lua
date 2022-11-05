@@ -1,10 +1,11 @@
 local theme = {}
-local theme_name = 'mountain'
-local theme_dir = require("gears").filesystem.get_configuration_dir() .. "theme/themes/" .. theme_name .. "/"
-local icon_dir  = require("gears").filesystem.get_configuration_dir() .. "theme/icons/"
-local colors = require('theme.themes.' .. theme_name)
 local dpi = require("beautiful").xresources.apply_dpi
-local theme_assets = require "beautiful.theme_assets"
+local theme_assets = require("beautiful.theme_assets")
+
+-- Colorscheme
+local theme_name = 'paradise'
+local theme_dir = require("gears").filesystem.get_configuration_dir() .. "theme/themes/" .. theme_name .. "/"
+local colors = require('theme.themes.' .. theme_name)
 
 -- UI fonts
 theme.font_name           = "JetBrains Mono "
@@ -13,18 +14,18 @@ theme.useless_gap         = 6
 
 -- Bg colors
 theme.bg_normal           = colors.background
-theme.bg_focus            = colors.background
+theme.bg_focus            = colors.altblack
 
 -- Fg colors
 theme.fg_normal           = colors.foreground
-theme.fg_focus            = colors.foreground
-theme.fg_urgent           = colors.foreground
+theme.fg_focus            = colors.black
+theme.fg_urgent           = colors.red
 theme.fg_minimize         = colors.foreground
 
 -- Borders
 theme.border_color_normal = colors.background
 theme.border_color_active = colors.foreground
-theme.border_width        = 2
+theme.border_width        = 1
 
 -- Titlebar colors
 theme.titlebar_bg_normal = colors.background
@@ -58,9 +59,6 @@ theme.parent_filter_list   = { "discord", "firefox", "calibre", "Chromium" }
 theme.child_filter_list    = { "discord", "firefox", "calibre", "Chromium" }
 theme.swallowing_filter    = true
 
--- Tag Preview (bling)
-theme.tag_preview_client_opacity = 1
-
 -- Menu
 theme.menu_bg_normal    = colors.background
 theme.menu_bg_focus     = colors.black
@@ -80,16 +78,16 @@ theme.hotkeys_description_font = theme.font_name .. "Regular 10"
 theme.hotkeys_group_margin     = dpi(50)
 
 -- Naughty
-theme.notification_bg           = colors.background
-theme.notification_fg           = colors.foreground
-theme.notification_border_color = colors.foreground
-theme.notification_border_width = 3
+theme.notification_spacing   = 12
 
-theme.awesome_icon              = icon_dir .. "awesome.svg"
+-- Taglist
+theme.taglist_bg_focus = colors.altblack
+theme.taglist_fg_focus = colors.foreground
+theme.taglist_bg_normal = colors.red
+theme.taglist_fg_empty = colors.black
 
-theme.taglist_bg_focus    = colors.green
-theme.taglist_fg_focus    = theme.bg_normal
-theme.taglist_fg_empty    = theme.fg_normal
-theme.taglist_fg_occupied = theme.fg_normal
+theme.awesome_icon = theme_assets.awesome_icon(
+    theme.menu_height, colors.foreground, colors.background
+)
 
 return theme

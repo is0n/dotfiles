@@ -18,7 +18,7 @@ require("ui.titlebars")
 require("ui.menu")
 
 -- Bar
--- require("ui.bar")
+require("ui.bar")
 
 -- Layouts
 require("config.layouts")

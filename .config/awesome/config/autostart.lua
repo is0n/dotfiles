@@ -16,7 +16,7 @@ function pgrep(pattern, cmd)
 end
 
 pgrep("alttab", "alttab -w 1")
-pgrep("eww", "~/.local/bin/vbar open")
+-- pgrep("eww", "~/.local/bin/vbar open")
 
 function exec(cmd)
   cmd = cmd:gsub("~", os.getenv("HOME"))
